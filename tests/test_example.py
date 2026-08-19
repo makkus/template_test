@@ -4,6 +4,8 @@ This module contains a placeholder test that intentionally fails
 to remind developers to implement proper tests.
 """
 
+import pytest
+
 from template_test._version import version
 
 
@@ -14,7 +16,7 @@ def test_version_exists():
 
 def test_todo_implement_tests():
     """Placeholder test that fails to remind developers to implement tests."""
-    assert False, (
+    pytest.fail(
         "TODO: Implement proper tests for template_test!\n"
         "This is a placeholder test that intentionally fails.\n"
         "Replace this with actual tests for your functionality."

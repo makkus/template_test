@@ -7,10 +7,10 @@
 #
 # Licensed under the BSD Zero Clause License
 
+"""Top-level package for the template_test project."""
+
 import builtins
 from typing import IO, Any
-
-"""Top-level package for the template_test project."""
 
 __author__ = "Markus Binsteiner"
 __email__ = "markus@frkl.dev"
