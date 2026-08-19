@@ -4,6 +4,7 @@ inputs:
   python-version:
     description: 'Python version to install'
     required: false
+    # The newest supported version; the lockfile is built against this one.
     default: '3.14'
 runs:
   using: 'composite'

@@ -9,19 +9,15 @@ authors = [
     {name = "Markus Binsteiner", email = "markus@frkl.dev"}
 ]
 readme = "README.md"
-requires-python = ">=3.9,<4.0"
+requires-python = ">=3.14,<4.0"
 keywords = []
 license = "0BSD"
 classifiers = [
-    "Programming Language :: Python :: 3",
     "Development Status :: 3 - Alpha",
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3 :: Only",
-    "Programming Language :: Python :: 3.10",
-    "Programming Language :: Python :: 3.11",
-    "Programming Language :: Python :: 3.12",
-    "Programming Language :: Python :: 3.13"
+    "Programming Language :: Python :: 3.14"
 ]
 dependencies = [
 ]
@@ -89,8 +85,8 @@ src = ["src", "tests"]
 
 fix = true
 
-# Assume Python 3.10.
-target-version = "py310"
+# The oldest Python the project supports, so ruff does not suggest anything newer.
+target-version = "py314"
 
 [tool.ruff.lint]
 dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
@@ -124,6 +120,7 @@ channels = ["conda-forge"]
 platforms = ["linux-64", "win-64", "osx-64", "osx-arm64"]
 
 [tool.pixi.dependencies]
+python = ">=3.14"
 pip = ">=25.0"
 
 [tool.pixi.pypi-dependencies]

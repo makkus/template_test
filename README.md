@@ -24,6 +24,7 @@ TODO
 - git
 - make (on Linux / Mac OS X -- optional)
 - just (optional)
+- pixi ( https://pixi.sh ) -- only needed for `just build-conda`
 
 ### Check out the source code & enter the project directory
 
@@ -42,6 +43,7 @@ installed, which should be the case for Linux & Mac OS X systems.
 - `just typecheck`: run type-checker
 - `just lint`: run the `ruff` linter on the source code
 - `just format`: run the `ruff` formatter on the source code (similar to `black`)
+- `just build-conda`: build the conda package from `conda.recipe/recipe.yaml` (requires `pixi`)
 
 Alternatively, if you don't have the `just` command available, you can use `uv` directly to run those tasks:
 

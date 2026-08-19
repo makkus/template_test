@@ -3,6 +3,8 @@ src/template_test/_version.py
 uv.lock
 pixi.lock
 .pixi/
+# rattler-build's default output directory
+output/
 .venv/
 
 # misc
