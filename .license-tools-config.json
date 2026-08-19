@@ -1,0 +1,11 @@
+{
+  "author": {
+    "from_git": true
+  },
+  "license": "0BSD",
+  "custom_license": "SPDX-License-Identifier: 0BSD\n\nLicensed under the BSD Zero Clause License",
+  "include": [
+    "src/**/*.py"
+  ],
+  "lines_after_license": "ignore"
+}

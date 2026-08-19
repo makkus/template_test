@@ -1,0 +1,125 @@
+[build-system]
+requires = ["hatchling", "uv-dynamic-versioning"]
+build-backend = "hatchling.build"
+
+[project]
+name = "template_test"
+description = "A test project."
+authors = [
+    {name = "Markus Binsteiner", email = "markus@frkl.dev"}
+]
+readme = "README.md"
+requires-python = ">=3.9,<4.0"
+keywords = []
+license = "0BSD"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Development Status :: 3 - Alpha",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13"
+]
+dependencies = [
+]
+dynamic = ["version"]
+
+
+[project.optional-dependencies]
+
+[dependency-groups]
+dev = [
+    "build",
+    "devtools",
+    "icecream",
+    "pre-commit",
+    "pytest",
+    "pytest-cov",
+    "rich",
+    "ruff",
+    "snoop",
+    "ty",
+    "wat"
+]
+
+[project.urls]
+homepage = "https://github.com/makkus/template_test"
+documentation = "https://makkus.github.io/template_test"
+repository = "https://github.com/makkus/template_test"
+
+[tool.hatch.version]
+source = "uv-dynamic-versioning"
+fallback-version = "0.0.0"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/template_test"]
+
+[tool.hatch.build.hooks.version]
+path = "src/template_test/_version.py"
+template = '''version = "{version}"
+'''
+
+[tool.uv-dynamic-versioning]
+pattern = "default-unprefixed"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "--strict-markers",
+    "--tb=short",
+    "--color=yes"
+]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests as integration tests",
+    "unit: marks tests as unit tests"
+]
+
+[tool.ruff]
+line-length = 88
+
+src = ["src", "tests"]
+
+fix = true
+
+# Assume Python 3.10.
+target-version = "py310"
+
+[tool.ruff.lint]
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+[tool.ruff.lint.per-file-ignores]
+# The debug helpers in this file attach names to `builtins` on purpose:
+#   B010   ruff prefers `builtins.x = y`, but `ty` then reports `unresolved-attribute`,
+#          so `setattr` is the only spelling both tools accept.
+#   BLE001 the rich fallback has to catch whatever formatting an arbitrary object raises.
+"src/template_test/__init__.py" = ["B010", "BLE001"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["template_test"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ty.rules]
+unused-ignore-comment = "ignore"
+
+[tool.pixi.project]
+channels = ["conda-forge"]
+platforms = ["linux-64", "win-64", "osx-64", "osx-arm64"]
+
+[tool.pixi.dependencies]
+pip = ">=25.0"
+
+[tool.pixi.pypi-dependencies]
+"template_test" = { path = ".", editable = true }
+
+[tool.pixi.environments]
+default = { solve-group = "default" }
+dev = { features = ["dev"] }  # should be the same solve-group, but that doesn't seem to work with pixi currently
