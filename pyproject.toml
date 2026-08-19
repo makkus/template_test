@@ -9,7 +9,9 @@ authors = [
     {name = "Markus Binsteiner", email = "markus@frkl.dev"}
 ]
 readme = "README.md"
-requires-python = ">=3.14,<4.0"
+# No upper bound on purpose: capping requires-python makes pip back-solve to old
+# package versions on future Pythons instead of failing with a clear message.
+requires-python = ">=3.14"
 keywords = []
 license = "0BSD"
 classifiers = [
@@ -23,12 +25,8 @@ dependencies = [
 ]
 dynamic = ["version"]
 
-
-[project.optional-dependencies]
-
 [dependency-groups]
 dev = [
-    "build",
     "devtools",
     "icecream",
     "pre-commit",

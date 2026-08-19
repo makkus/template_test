@@ -2,6 +2,12 @@ name: "linux tests and package builds for 'template_test'"
 # This workflow is triggered on pushes to the repository.
 on: [push]
 
+# Superseded runs on the same ref are cancelled; tag refs are unique, so release
+# runs are never affected.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
 
   commitlint:
@@ -72,7 +78,7 @@ jobs:
           fetch-depth: 0
       - uses: ./.github/actions/setup-uv-env
       - name: create packages
-        run: uv run python -m build
+        run: uv build
       - name: upload artifacts
         uses: actions/upload-artifact@v6
         with:
@@ -91,6 +97,9 @@ jobs:
       - build_conda_package
     permissions:
       id-token: write
+    # Trusted publishing is registered against this environment name (see TODO.md);
+    # GitHub creates the environment on first use.
+    environment: pypi
     steps:
       - name: Retrieve build distributions
         uses: actions/download-artifact@v7
@@ -196,4 +205,6 @@ jobs:
     - name: merge tag
       run: git merge "${RELEASE_VERSION}"
     - name: push updated main branch
-      run: git push https://${{ secrets.GITHUB_TOKEN }}@github.com/makkus/template_test.git
+      # actions/checkout leaves its token-backed auth configured for `origin`, so no
+      # token needs to appear on the command line.
+      run: git push origin main
