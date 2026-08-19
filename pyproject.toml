@@ -108,7 +108,7 @@ dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
 #          so `setattr` is the only spelling both tools accept. pyrefly accepts either
 #          form, but ty still runs via `just typecheck-ty` -- keep `setattr`.
 #   BLE001 the rich fallback has to catch whatever formatting an arbitrary object raises.
-"src/template_test/__init__.py" = ["B010", "BLE001"]
+"src/template_test/_debug.py" = ["B010", "BLE001"]
 
 [tool.ruff.lint.isort]
 known-first-party = ["template_test"]

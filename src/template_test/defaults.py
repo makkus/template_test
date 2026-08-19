@@ -7,15 +7,16 @@
 #
 # Licensed under the BSD Zero Clause License
 
-import os
+"""Filesystem locations for data bundled with the template_test package."""
+
 import sys
+from pathlib import Path
 
-if getattr(sys, "oxidized", False):
-    PACKAGE_MODULE_BASE_FOLDER = "xxx"
-    raise NotImplementedError()
-elif not hasattr(sys, "_MEIPASS"):
-    PACKAGE_MODULE_BASE_FOLDER = os.path.dirname(__file__)
+if hasattr(sys, "_MEIPASS"):
+    # Running from a PyInstaller bundle: package data is unpacked under the
+    # bundle's temp dir instead of living next to this file.
+    PACKAGE_MODULE_BASE_FOLDER = Path(sys._MEIPASS) / "template_test"
 else:
-    PACKAGE_MODULE_BASE_FOLDER = os.path.join(sys._MEIPASS, "template_test")
+    PACKAGE_MODULE_BASE_FOLDER = Path(__file__).parent
 
-RESOURCES_FOLDER = os.path.join(PACKAGE_MODULE_BASE_FOLDER, "resources")
+RESOURCES_FOLDER = PACKAGE_MODULE_BASE_FOLDER / "resources"
